@@ -444,7 +444,59 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // Back to Top Button
+    const backToTopBtn = document.getElementById('backToTop');
+    if (backToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.add('show');
+            } else {
+                backToTopBtn.classList.remove('show');
+            }
+        });
+        
+        backToTopBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
+
+    // Hero Typing Animation
+    const typingElement = document.querySelector('.typewriter-text');
+    if (typingElement) {
+        const roles = ["Product Engineer", "Full-Stack Developer", "UI/UX Enthusiast"];
+        let currentRoleIndex = 0;
+        let currentCharIndex = 0;
+        let isDeleting = false;
+        let typingDelay = 100;
+        
+        function type() {
+            const currentRole = roles[currentRoleIndex];
+            
+            if (isDeleting) {
+                typingElement.textContent = currentRole.substring(0, currentCharIndex - 1);
+                currentCharIndex--;
+                typingDelay = 50;
+            } else {
+                typingElement.textContent = currentRole.substring(0, currentCharIndex + 1);
+                currentCharIndex++;
+                typingDelay = 100;
+            }
+            
+            if (!isDeleting && currentCharIndex === currentRole.length) {
+                isDeleting = true;
+                typingDelay = 2000; // Pause at end of word
+            } else if (isDeleting && currentCharIndex === 0) {
+                isDeleting = false;
+                currentRoleIndex = (currentRoleIndex + 1) % roles.length;
+                typingDelay = 500; // Pause before next word
+            }
+            
+            setTimeout(type, typingDelay);
+        }
+        
+        // Start typing after 1s delay
+        setTimeout(type, 1000);
+    }
 });
-
-
-
