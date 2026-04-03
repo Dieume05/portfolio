@@ -225,6 +225,7 @@ section { padding: 8rem 0; z-index: 2; position: relative; }
     transition: transform 0.35s, box-shadow 0.35s, border-color 0.35s;
 }
 .project-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-float); border-color: var(--primary); }
+.project-card:hover img { transform: scale(1.05); }
 
 .project-visual {
     position: relative; height: 220px;
